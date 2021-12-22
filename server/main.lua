@@ -8,4 +8,4 @@ QBCore.Commands.Add('ealerts', "Send eMail to Everyone", {{name = 'Email', help 
     else
         TriggerClientEvent('QBCore:Notify', source, 'Exceeds maximum characters!', 'error')
     end
-end, "god")
+end, "admin")
