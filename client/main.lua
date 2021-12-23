@@ -6,10 +6,10 @@ function TsunamiEffect()
         Wait(1000)
         startStamina = startStamina - 1
         RestorePlayerStamina(PlayerId(), 1.0)
-        if math.random(1, 100) < 51 then
-            ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.09)
-            if IsPedRunning(PlayerPedId()) and math.random(1,10) < 5 then
-                SetPedToRagdoll(PlayerPedId(), math.random(1000, 3000), math.random(1000, 3000), 3, 0, 0, 0)
+        if math.random(1, 100) < 11 then
+            if not IsPedRagdoll(PlayerPedId()) and IsPedOnFoot(PlayerPedId()) and not IsPedSwimming(PlayerPedId()) then
+                ShakeGameplayCam('SMALL_EXPLOSION_SHAKE', 0.08) -- change this float to increase/decrease camera shake
+                SetPedToRagdollWithFall(PlayerPedId(), 7500, 9000, 1, GetEntityForwardVector(PlayerPedId()), 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
             end
         end
     end
