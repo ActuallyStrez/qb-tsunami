@@ -5,11 +5,11 @@ A basic script that allows Admins to send an Emergency Email to everyone in the 
 
 Command: 
 /ealerts (Max characters 255)
+
 /ealertstsunami (Send's TSUNAMI WARNING eMail to Everyone)
 
 Credits:
-Google
-Jay
+Google, Jay
 
 Please add following to qb-weathersync
 
