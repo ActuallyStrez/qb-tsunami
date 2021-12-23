@@ -23,4 +23,5 @@ RegisterNetEvent('qb-weathersync:client:TsunamiAlert', function()
             Wait(5000)
 		end
 	end)
-end)```
+end)
+```
