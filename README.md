@@ -11,6 +11,7 @@ Please add following to qb-weathersync
 
 qb-weathersync/client.lua/line36
 
+```lua 
 RegisterNetEvent('qb-weathersync:client:TsunamiAlert', function()
 	disable = true
 	CreateThread(function()
@@ -22,4 +23,4 @@ RegisterNetEvent('qb-weathersync:client:TsunamiAlert', function()
             Wait(5000)
 		end
 	end)
-end)
+end)```
