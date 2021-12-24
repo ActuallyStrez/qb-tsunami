@@ -38,7 +38,7 @@ end, "god")
 
 -- Manual Tsunami Broadcast Text Email
 
-QBCore.Commands.Add('ealertstsunami', "Send eMail to Everyone", {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
+QBCore.Commands.Add('ealertstsunamitext', "Send eMail to Everyone", {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
     local msg = table.concat(args, " ")
     local len = tonumber(string.len(msg))
     if len <= 255 then
