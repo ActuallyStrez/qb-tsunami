@@ -6,6 +6,8 @@ A basic script that allows Admins to send an Emergency Email to everyone in the 
 Command: 
 /ealerts Custom Email with Alert Sound (Max characters 255)
 
+/ealertstsunamitext (Send a custom Tsunami effect email warning)
+
 /ealertstsunami (Send's 15 Minute TSUNAMI WARNING eMail to Everyone) 15 Minute warning only.
 
 Credits:
