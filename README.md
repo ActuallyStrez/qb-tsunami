@@ -4,28 +4,17 @@ QBCore Emergency Alerts Email
 A basic script that allows Admins to send an Emergency Email to everyone in the city, Is great for incoming Tsunami and many other possibilities.
 
 Command: 
-/ealerts (Max characters 255)
+/ealerts Custom Email with Alert Sound (Max characters 255)
 
-/ealertstsunami (Send's TSUNAMI WARNING eMail to Everyone)
+/ealertstsunami (Send's 15 Minute TSUNAMI WARNING eMail to Everyone)
 
 Credits:
 Google, Jay
 
-Please add following to qb-weathersync
+Added txAdmin Auto-Restarter for 15 minutes, 5 minute, 1 minute
 
-qb-weathersync/client.lua/line36
+15 Minute Warning: will start with weather changing to Thunder / Rain / Aftershock effect
 
-```lua 
-RegisterNetEvent('qb-weathersync:client:TsunamiAlert', function()
-	disable = true
-	CreateThread(function()
-		while disable do
-			SetRainLevel(0.5)
-			SetWeatherTypePersist('THUNDER')
-			SetWeatherTypeNow('THUNDER')
-			SetWeatherTypeNowPersist('THUNDER')
-            Wait(5000)
-		end
-	end)
-end)
-```
+5 Minute Warning: will enable a City Blackout / Aftershock effect
+
+1 Minute Warning: Aftershock effect
