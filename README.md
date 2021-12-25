@@ -3,6 +3,8 @@ QBCore Emergency Alerts Email
 
 A basic script that allows Admins to send an Emergency Email to everyone in the city, Is great for incoming Tsunami and many other possibilities.
 
+**Make sure you add raidsiren.ogg to your QBCore resources\[standalone]\interact-sound\client\html\sounds**
+
 Command: 
 /ealerts Custom Email with Alert Sound (Max characters 255)
 
@@ -11,7 +13,7 @@ Command:
 /ealertstsunami (Send's 15 Minute TSUNAMI WARNING eMail to Everyone) 15 Minute warning only.
 
 Credits:
-Google, Jay
+Google, Jay, Velkostatkar
 
 Added txAdmin Auto-Restarter for 15 minutes, 5 minute, 1 minute
 
