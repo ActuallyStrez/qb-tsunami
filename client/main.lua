@@ -87,6 +87,8 @@ end)
 RegisterNetEvent('strez:client:SendMailTsunamiAuto5', function(text)
     TriggerEvent('InteractSound_CL:PlayOnOne', 'Alert', 0.7)
     Wait(math.random(7000, 13000))
+    Wait(35000)
+	TriggerEvent('InteractSound_CL:PlayOnOne', 'raidsiren', 0.2)
     TriggerServerEvent('qb-phone:server:sendNewMail', {
         sender = "District of Los Santos",
         subject = "Emergency Alert",
