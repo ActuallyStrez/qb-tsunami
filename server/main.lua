@@ -26,30 +26,30 @@ end)
 
 -- Basic Broadcast Text Email
 
-QBCore.Commands.Add('ealerts', "Send eMail to Everyone", {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
-    local msg = table.concat(args, " ")
+QBCore.Commands.Add('ealerts', 'Send eMail to Everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
+    local msg = table.concat(args, ' ')
     local len = tonumber(string.len(msg))
     if len <= 255 then
         TriggerClientEvent('strez:client:SendMailAlertsBasic', -1, msg)
     else
         TriggerClientEvent('QBCore:Notify', source, 'Exceeds maximum characters!', 'error')
     end
-end, "god")
+end, 'god')
 
 -- Manual Tsunami Broadcast Text Email
 
-QBCore.Commands.Add('ealertstsunamitext', "Send eMail to Everyone", {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
-    local msg = table.concat(args, " ")
+QBCore.Commands.Add('ealertstsunamitext', 'Send eMail to Everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
+    local msg = table.concat(args, ' ')
     local len = tonumber(string.len(msg))
     if len <= 255 then
         TriggerClientEvent('strez:client:SendMailTsunamiManual', -1, msg)
     else
         TriggerClientEvent('QBCore:Notify', source, 'Exceeds maximum characters!', 'error')
     end
-end, "god")
+end, 'god')
 
 -- Manual 15 Minutes Tsunami Warning Override Email
 
-QBCore.Commands.Add('ealertstsunami', "Send TSUNAMI WARNING eMail to Everyone", {}, true, function(source, args)
+QBCore.Commands.Add('ealertstsunami', 'Send TSUNAMI WARNING eMail to Everyone', {}, true, function(source, args)
     TriggerClientEvent('strez:client:SendMailTsunamiManualOverride', -1)
-end, "god")
+end, 'god')
