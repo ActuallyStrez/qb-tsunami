@@ -19,6 +19,6 @@ Added txAdmin Auto-Restarter for 15 minutes, 5 minute, 1 minute
 
 15 Minute Warning: will start with weather changing to Thunder / Rain / Aftershock effect
 
-5 Minute Warning: will enable a City Blackout / Aftershock effect
+5 Minute Warning: will enable a City Blackout / Aftershock effect / Raid Siren
 
 1 Minute Warning: Aftershock effect
