@@ -14,8 +14,3 @@ This is a 3 tier restarter, 15 minute, 5 minute, 1 minute each comes with differ
 -------------------- Sound Interactions --------------------
 
 Please place all the .ogg sounds into interact-sound\client\sounds
-
--------------------- Links --------------------
-
-Discord: https://discord.gg/UHG4H2S9pG
-Tebex: https://actuallystrez.tebex.io/package/5045281
