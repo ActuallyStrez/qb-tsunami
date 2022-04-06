@@ -3,7 +3,7 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -------------------- Custom Tsunami Email --------------------
-
+ff
 -- Custom Warning Email
 QBCore.Commands.Add('tsunamialert', 'Send Custom eMail to Everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
     local msg = table.concat(args, ' ')
