@@ -19,6 +19,19 @@ function TsunamiEffect()
     startStamina = 0
 end
 
+-------------------- Custom Tsunami Email --------------------
+
+RegisterNetEvent('strez:client:SendMailTsunamiCustom', function(text)
+    TriggerEvent('InteractSound_CL:PlayOnOne', 'Alert', 0.5)
+    Wait(math.random(7000, 13000))
+    TriggerServerEvent('qb-phone:server:sendNewMail', {
+        sender = "District of Los Santos",
+        subject = "Emergency Broadcast",
+        message = text,
+        button = {}
+    })
+end)
+
 -------------------- Manual Tsunami Email --------------------
 
 -- Manual Warning Email
@@ -34,6 +47,7 @@ RegisterNetEvent('strez:client:SendMailTsunamiManual', function(text)
     Wait(math.random(30000, 60000))
     TriggerServerEvent('qb-weathersync:server:setWeather', 'THUNDER')
     Wait(math.random(25000, 35000))
+    TriggerEvent('InteractSound_CL:PlayOnOne', 'raidsiren', 0.1)
     TsunamiEffect()
 end)
 
@@ -59,7 +73,7 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto5', function(text)
     TriggerEvent('InteractSound_CL:PlayOnOne', 'Alert', 0.5)
     Wait(math.random(7000, 13000))
     Wait(35000)
-	TriggerEvent('InteractSound_CL:PlayOnOne', 'raidsiren', 0.2)
+	TriggerEvent('InteractSound_CL:PlayOnOne', 'raidsiren', 0.1)
     TriggerServerEvent('qb-phone:server:sendNewMail', {
         sender = 'District of Los Santos',
         subject = 'Emergency Broadcast',

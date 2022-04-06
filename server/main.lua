@@ -2,17 +2,24 @@
 -- Code
 local QBCore = exports['qb-core']:GetCoreObject()
 
--------------------- Manual Tsunami Email --------------------
+-------------------- Custom Tsunami Email --------------------
 
--- Manual Warning Email
-QBCore.Commands.Add('tsunamialert', 'Send eMail to Everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
+-- Custom Warning Email
+QBCore.Commands.Add('tsunamialert', 'Send Custom eMail to Everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
     local msg = table.concat(args, ' ')
     local len = tonumber(string.len(msg))
     if len <= 255 then
-        TriggerClientEvent('strez:client:SendMailTsunamiManual', -1, msg)
+        TriggerClientEvent('strez:client:SendMailTsunamiCustom', -1, msg)
     else
         TriggerClientEvent('QBCore:Notify', source, 'Exceeds maximum characters!', 'error')
     end
+end, 'god')
+
+-------------------- Manual Tsunami Email --------------------
+
+-- Manual 15 Minute Tsunami Warning
+QBCore.Commands.Add('tsunamidefault', 'Send TSUNAMI WARNING eMail to Everyone', {}, true, function(source, args)
+    TriggerClientEvent('strez:client:SendMailTsunamiManual', -1)
 end, 'god')
 
 -------------------- Auto Restart Tsunami Email --------------------
