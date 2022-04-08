@@ -18,3 +18,15 @@ I have designed the script to allow txAdmin to auto-restart to send Phone Emails
 -------------------- Sound Interactions --------------------
 
 Please place all the .ogg sounds into interact-sound\client\sounds
+
+-------------------- GKS Phone Support --------------------
+
+If you are using https://fivem.gkshop.org/package/4862478 (QBCore)
+
+You will need to edit the follow lines and replace with this.
+
+Search "TriggerServerEvent('qb-phone:server:sendNewMail', {"
+
+Replace with "TriggerServerEvent('gksphone:NewMail', {"
+
+Also you will need to remove the qb-phone Dependencie from the fxmanifest
