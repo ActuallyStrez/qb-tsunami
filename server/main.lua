@@ -32,7 +32,7 @@ AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
 end)
 -- 5 Minutes Reminder
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
-    if eventData.secondsRemaining == 600 then
+    if eventData.secondsRemaining == 300 then
         TriggerClientEvent('strez:client:SendMailTsunamiAuto5', -1)
     end
 end)
