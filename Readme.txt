@@ -4,8 +4,7 @@
 
 Welcome to the Tsunami Quality of Life script, I have designed the script to allow auto-restart through txAdmin to bring having restarts more ingame depth.
 
-This is a 3-tier restarter, 15 minutes, 5 minutes, and 1 minute each comes with a different effect and a stage.
-
+This is a 4-tier restarter, 30minutes, 15 minutes, 5 minutes, and 1 minute.
 
 
 I have designed the script to allow txAdmin to auto-restart to send Phone Emails in-game to players, This way people are aware of server restarts without having to break Character.
