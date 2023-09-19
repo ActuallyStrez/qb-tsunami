@@ -2,14 +2,25 @@
 -- Code
 local QBCore = exports['qb-core']:GetCoreObject()
 
--------------------- Custom Tsunami Email --------------------
+-------------------- Email Commands --------------------
 
--- Custom Warning Email
-QBCore.Commands.Add('tsunamialert', 'Send Custom eMail to Everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
+-- Emergency Email
+QBCore.Commands.Add('emergencyemail', 'Send emergency email to everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
     local msg = table.concat(args, ' ')
     local len = tonumber(string.len(msg))
     if len <= 255 then
-        TriggerClientEvent('strez:client:SendMailTsunamiCustom', -1, msg)
+        TriggerClientEvent('strez:client:SendEmergencyEmail', -1, msg)
+    else
+        TriggerClientEvent('QBCore:Notify', source, 'Exceeds maximum characters!', 'error')
+    end
+end, 'god')
+
+-- Announcement Email
+QBCore.Commands.Add('announcementemail', 'Send announcement email to everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
+    local msg = table.concat(args, ' ')
+    local len = tonumber(string.len(msg))
+    if len <= 255 then
+        TriggerClientEvent('strez:client:SendAnnouncementEmail', -1, msg)
     else
         TriggerClientEvent('QBCore:Notify', source, 'Exceeds maximum characters!', 'error')
     end
@@ -18,11 +29,18 @@ end, 'god')
 -------------------- Manual Tsunami Email --------------------
 
 -- Manual 15 Minute Tsunami Warning
-QBCore.Commands.Add('tsunamidefault', 'Send TSUNAMI WARNING eMail to Everyone', {}, true, function(source, args)
-    TriggerClientEvent('strez:client:SendMailTsunamiManual', -1)
+QBCore.Commands.Add('tsunamimanual', '15 minute tsuanami warning', {}, true, function(source, args)
+    TriggerClientEvent('strez:client:TsunamiManual', -1)
 end, 'god')
 
 -------------------- Auto Restart Tsunami Email --------------------
+
+-- 30 minutes Reminder
+AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
+    if eventData.secondsRemaining == 1800 then
+        TriggerClientEvent('strez:client:SendMailTsunamiAuto30', -1)
+    end
+end)
 
 -- 15 Minutes Reminder
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
@@ -30,6 +48,7 @@ AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
         TriggerClientEvent('strez:client:SendMailTsunamiAuto15', -1)
     end
 end)
+
 -- 5 Minutes Reminder
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
     if eventData.secondsRemaining == 300 then

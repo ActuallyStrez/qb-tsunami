@@ -1,11 +1,12 @@
 fx_version 'cerulean'
 game 'gta5'
+lua54 'yes'
 
 description 'QBCore Tsunami'
 name 'qb-tsunami'
 website 'https://qbcore-framework.github.io/qb-docs/'
 developer 'ActuallyStrez, QBCore Discord'
-version 'V1'
+version 'V2'
 
 client_scripts {
     'client/main.lua'
@@ -14,10 +15,3 @@ client_scripts {
 server_scripts {
     'server/main.lua'
 }
-
-dependencies {
-    'qb-core',
-    'qb-phone'
-}
-
-lua54 'yes'
