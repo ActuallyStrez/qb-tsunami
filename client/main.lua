@@ -1,9 +1,9 @@
 -------------------- Strez Tsunami --------------------
--- Code
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -------------------- Emails --------------------
 
+-- Emergency Alert
 RegisterNetEvent('strez:client:SendEmergencyEmail', function(text)
     Wait(math.random(7000, 13000))
     TriggerServerEvent('qb-phone:server:sendNewMail', {
@@ -14,6 +14,7 @@ RegisterNetEvent('strez:client:SendEmergencyEmail', function(text)
     })
 end)
 
+-- Announcement Email
 RegisterNetEvent('strez:client:SendAnnouncementEmail', function(text)
     Wait(math.random(7000, 13000))
     TriggerServerEvent('qb-phone:server:sendNewMail', {

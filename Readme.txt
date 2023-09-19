@@ -20,6 +20,13 @@ New custom emails one for Announcements and  one Emergency Alerts
 
 1 Minute Warning - Email & Blackout & Weather Change (Thunder)
 
+-------------------- Commands --------------------
+
+/emergencyemail 'Send emergency email to everyone'
+
+/announcementemail 'Send announcement email to everyone'
+
+/tsunamimanual '15 minute tsuanami warning'
 
 -------------------- Dependencies --------------------
 

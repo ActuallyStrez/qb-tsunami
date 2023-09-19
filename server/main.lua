@@ -1,5 +1,4 @@
 -------------------- Strez Tsunami --------------------
--- Code
 local QBCore = exports['qb-core']:GetCoreObject()
 
 -------------------- Email Commands --------------------
@@ -55,6 +54,7 @@ AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
         TriggerClientEvent('strez:client:SendMailTsunamiAuto5', -1)
     end
 end)
+
 -- 1 Minutes Reminder
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)
     if eventData.secondsRemaining == 60 then
