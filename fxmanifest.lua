@@ -15,3 +15,8 @@ client_scripts {
 server_scripts {
     'server/main.lua'
 }
+
+escrow_ignore {
+    'client/main.lua',  -- Only ignore one file
+    'server/main.lua', -- Works for any file, stream or code
+}
