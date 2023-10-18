@@ -1,4 +1,4 @@
-
+Added esx support
 Welcome to Tsunami Quality of Life
 
 Welcome to the Tsunami Quality of Life script, I have designed the script to allow auto-restart through txAdmin to bring having restarts more ingame depth.
