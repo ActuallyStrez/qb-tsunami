@@ -15,9 +15,9 @@ New custom emails one for Announcements and  one for Emergency Alerts
 
 15 Minute Warning - Email & Weather Change (Rain)
 
-5 Minute Warning - Email & Weather Change (Thunder)
+5 Minute Warning - Email & Weather Change (Thunder) & Water Rises & Blackout
 
-1 Minute Warning - Email & Blackout & Weather Change (Thunder)
+1 Minute Warning - Email Final Warning To Logout
 
 
 
@@ -39,18 +39,6 @@ New custom emails one for Announcements and  one for Emergency Alerts
 
 
 
--------------------- GKS Phone Support --------------------
-
-If you are using https://fivem.gkshop.org/package/4862478 (QBCore)
-
-You will need to edit the following lines and replace them with this.
-
-Search "TriggerServerEvent('qb-phone:server:sendNewMail', {"
-
-Replace with "TriggerServerEvent('gksphone:NewMail', {"
-
-
-
 -------------------- V2 UPDATE --------------------
 
 -- Completely removed screen shake/ped movement
@@ -59,6 +47,11 @@ Replace with "TriggerServerEvent('gksphone:NewMail', {"
 
 -- added Emergency Alert/Announcement email commands to avoid using txadmin announcements this way players can not rush to read.
 
+
+
+-------------------- V3 UPDATE --------------------
+
+-- Added Water Rising During Live Restart
 
 
 P.S. Thank you for all the love and support given for this script, This is probably the final stage.

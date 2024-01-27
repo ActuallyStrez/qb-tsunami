@@ -1,7 +1,7 @@
 -------------------- Strez Tsunami --------------------
 local QBCore = exports['qb-core']:GetCoreObject()
 
--------------------- Email Commands --------------------
+-------------------- Gloabl Player Emails --------------------
 
 -- Emergency Email
 QBCore.Commands.Add('emergencyemail', 'Send emergency email to everyone', {{name = 'Email', help = 'Text of Email'}}, true, function(source, args)
@@ -25,14 +25,14 @@ QBCore.Commands.Add('announcementemail', 'Send announcement email to everyone', 
     end
 end, 'god')
 
--------------------- Manual Tsunami Email --------------------
+-------------------- Manual Tsunami Restart --------------------
 
 -- Manual 15 Minute Tsunami Warning
 QBCore.Commands.Add('tsunamimanual', '15 minute tsuanami warning', {}, true, function(source, args)
     TriggerClientEvent('strez:client:TsunamiManual', -1)
 end, 'god')
 
--------------------- Auto Restart Tsunami Email --------------------
+-------------------- TxAdmin Auto Restart Tsunami --------------------
 
 -- 30 minutes Reminder
 AddEventHandler('txAdmin:events:scheduledRestart', function(eventData)

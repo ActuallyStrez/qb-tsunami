@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding = "UTF-8"?>
+<WaterData>
+  <WaterQuads>
+    <Item>
+      <minX value="-4000" />
+      <maxX value="4500" />
+      <minY value="-4000" />
+      <maxY value="8000" />
+      <Type value="0" />
+      <IsInvisible value="false" />
+      <HasLimitedDepth value="false" />
+      <!-- <LimitedDepth value="10" /> -->
+      <z value="0.0" />
+      <a1 value="26" />
+      <a2 value="26" />
+      <a3 value="26" />
+      <a4 value="26" />
+      <NoStencil value="false" />
+    </Item>
+  </WaterQuads>
+  <CalmingQuads>
+    <!-- <Item>
+      <minX value="-4000" />
+      <maxX value="4500" />
+      <minY value="-4000" />
+      <maxY value="8000" />
+      <fDampening value="0.0" />
+    </Item> -->
+  </CalmingQuads>
+  <WaveQuads>
+    <Item>
+      <minX value="-4000" />
+      <maxX value="4500" />
+      <minY value="-4000" />
+      <maxY value="8000" />
+      <Amplitude value="1.0" />
+      <XDirection value="0.603208" />
+      <YDirection value="0.797584" />
+    </Item>
+  </WaveQuads>
+</WaterData>

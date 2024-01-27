@@ -1,0 +1,45 @@
+
+<!-- Change the value of z value="30.0" to anything you want to increase or decrease water level.
+To change wave height, change value of Amplitude value="130". -->
+
+
+<?xml version="1.0" encoding = "UTF-8"?>
+<WaterData>
+  <WaterQuads>
+    <Item>
+      <minX value="-12000" />
+      <maxX value="12000" />
+      <minY value="-12000" />
+      <maxY value="12000" />
+      <Type value="0" />
+      <IsInvisible value="false" />
+      <HasLimitedDepth value="false" />
+      <z value="30.0" /><!-- Water height-->
+      <a1 value="26" />
+      <a2 value="26" />
+      <a3 value="26" />
+      <a4 value="26" />
+      <NoStencil value="false" />
+    </Item>
+  </WaterQuads>
+  <WaveQuads>
+    <Item>
+      <minX value="-12000" />
+      <maxX value="12000" />
+      <minY value="-12000" />
+      <maxY value="12000" />
+      <Amplitude value="120" /><!--Wave height-->
+      <XDirection value="0.9" />
+      <YDirection value="-0.2" />
+    </Item>
+    <CalmingQuads>
+      <Item>
+        <minX value="-12000" />
+        <maxX value="12000" />
+        <minY value="-12000" />
+        <maxY value="12000" />
+        <fDampening value="0.01" />
+      </Item>
+    </CalmingQuads>
+  </WaveQuads>
+</WaterData>
