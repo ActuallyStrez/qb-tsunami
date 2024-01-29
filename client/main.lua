@@ -16,23 +16,41 @@ end)
 -- Emergency Alert
 RegisterNetEvent('strez:client:SendEmergencyEmail', function(text)
     Wait(math.random(7000, 13000))
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
+    if Config.phone == 'qb' then
+        TriggerServerEvent('qb-phone:server:sendNewMail', {
         sender = "City of Los Santos",
         subject = "Emergency Alert",
         message = text,
-        button = {}
-    })
+            button = {}
+        })
+    elseif Config.phone == 'qs' then
+        TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+        sender = "City of Los Santos",
+        subject = "Emergency Alert",
+        message = text,
+            button = {}
+        })
+    end 
 end)
 
 -- Announcement Email
 RegisterNetEvent('strez:client:SendAnnouncementEmail', function(text)
     Wait(math.random(7000, 13000))
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = "City of Los Santos",
-        subject = "Announcement",
-        message = text,
-        button = {}
-    })
+    if Config.phone == 'qb' then
+        TriggerServerEvent('qb-phone:server:sendNewMail', {
+            sender = 'City of Los Santos',
+            subject = 'Announcemen',
+            message =  text,
+            button = {}
+        })
+    elseif Config.phone == 'qs' then
+        TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+            sender = 'City of Los Santos',
+            subject = 'Announcemen',
+            message =  text,
+            button = {}
+        })
+    end 
     Wait(500)
 end)
 
@@ -49,12 +67,21 @@ RegisterNetEvent('strez:client:TsunamiManual', function(text)
     elseif Config.Notify == 'ox' then
         lib.notify({ description = message, duration = 5000,type = 'info', position = 'top-right'})
     elseif Config.Notify == 'email' then
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = 'District of Los Santos',
-        subject = 'Emergency Broadcast',
-        message = message,
-        button = {}
-    })
+        if Config.phone == 'qb' then
+            TriggerServerEvent('qb-phone:server:sendNewMail', {
+                sender = 'District of Los Santos',
+                subject = 'Emergency Broadcast',
+                message =  message,
+                button = {}
+            })
+        elseif Config.phone == 'qs' then
+            TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+                sender = 'District of Los Santos',
+                subject = 'Emergency Broadcast',
+                message =  message,
+                button = {}
+            })
+        end        
     end
     Wait(math.random(5000, 15000))
     TriggerServerEvent('qb-weathersync:server:setWeather', 'THUNDER')
@@ -74,13 +101,22 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto30', function(text)
         TriggerEvent('QBCore:Notify', message, 'success', 5000)
     elseif Config.Notify == 'ox' then
         lib.notify({ description = message, duration = 5000,type = 'info', position = 'top-right'})
-    elseif Config.Notify == 'email' then
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = 'Los Santos Weather',
-        subject = 'Weather Forecast',
-        message = message,
-        button = {}
-    })
+    elseif Config.Notify == 'email' the
+        if Config.phone == 'qb' then
+            TriggerServerEvent('qb-phone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Weather Forecast',
+                message =  message,
+                button = {}
+            })
+        elseif Config.phone == 'qs' then
+            TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Weather Forecast',
+                message =  message,
+                button = {}
+            })
+        end
     end
     Wait(5000)
     TriggerServerEvent('qb-weathersync:server:setWeather', 'CLEAR')
@@ -95,12 +131,21 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto15', function(text)
     elseif Config.Notify == 'ox' then
         lib.notify({ description = message, duration = 5000,type = 'info', position = 'top-right'})
     elseif Config.Notify == 'email' then
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = 'Los Santos Weather',
-        subject = 'Weather Update',
-        message = message,
-        button = {}
-    })
+      if Config.phone == 'qb' then
+            TriggerServerEvent('qb-phone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Emergency Weather',
+                message =  message,
+                button = {}
+            })
+        elseif Config.phone == 'qs' then
+            TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Emergency Weather',
+                message =  message,
+                button = {}
+            })
+        end
     end
     Wait(5000)
     TriggerServerEvent('qb-weathersync:server:setWeather', 'RAIN')
@@ -116,12 +161,21 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto5', function(text)
     elseif Config.Notify == 'ox' then
         lib.notify({ description = message, duration = 5000,type = 'info', position = 'top-right'})
     elseif Config.Notify == 'email' then
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = 'Los Santos Weather',
-        subject = 'Emergency Weather',
-        message = message,
-        button = {}
-    })
+      if Config.phone == 'qb' then
+            TriggerServerEvent('qb-phone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Emergency Weather',
+                message =  message,
+                button = {}
+            })
+        elseif Config.phone == 'qs' then
+            TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Emergency Weather',
+                message =  message,
+                button = {}
+            })
+        end
     end
     Wait(math.random(5000, 15000))
     TriggerServerEvent('qb-weathersync:server:setWeather', 'THUNDER')
@@ -141,12 +195,21 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto1', function(text)
     elseif Config.Notify == 'ox' then
         lib.notify({ description =  message, duration = 5000,type = 'info', position = 'top-right'})
     elseif Config.Notify == 'email' then
-    TriggerServerEvent('qb-phone:server:sendNewMail', {
-        sender = 'Los Santos Weather',
-        subject = 'Emergency Weather',
-        message =  message,
-        button = {}
-    })
+      if Config.phone == 'qb' then
+            TriggerServerEvent('qb-phone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Emergency Weather',
+                message =  message,
+                button = {}
+            })
+        elseif Config.phone == 'qs' then
+            TriggerServerEvent('qs-smartphone:server:sendNewMail', {
+                sender = 'Los Santos Weather',
+                subject = 'Emergency Weather',
+                message =  message,
+                button = {}
+            })
+        end
     end
 end)
 
