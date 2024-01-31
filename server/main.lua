@@ -32,6 +32,13 @@ QBCore.Commands.Add('tsunamimanual', '15 minute tsuanami warning', {}, true, fun
     TriggerClientEvent('strez:client:TsunamiManual', -1)
 end, 'god')
 
+-------------------- Tsunami Showcase --------------------
+
+-- Tsunami Showcase
+QBCore.Commands.Add('tsunamishowcase', 'Tsunami Showcase Command', {}, true, function(source, args)
+    TriggerClientEvent('strez:client:TsunamiShowcase', -1)
+end, 'god')
+
 -------------------- TxAdmin Auto Restart Tsunami --------------------
 
 -- 30 minutes Reminder

@@ -6,7 +6,7 @@ game 'gta5'
 description 'QB Tsunami'
 name 'qb-tsunami'
 developer 'ActuallyStrez, Sky, Tofu, QBCore'
-version 'V3'
+version 'V3.5'
 lua54 'yes'
 
 files {
