@@ -12,6 +12,7 @@ Phones:
 qb-phone
 qs-phone
 gks-phone
+yflip-phone
 Notifications:
 qbcore notifications
 ox_lib notifications
