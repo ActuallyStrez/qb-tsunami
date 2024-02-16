@@ -1,10 +1,13 @@
 -------------------- Strez Tsunami --------------------
 local QBCore = exports['qb-core']:GetCoreObject()
 
-AddEventHandler('onClientResourceStart', function(resourceName)
+AddEventHandler('QBCore:Client:OnPlayerLoaded', function(resourceName)
     if (GetCurrentResourceName() ~= resourceName) then
         return
     end
+    
+    Wait(3000)
+
     local success = LoadWaterFromPath(GetCurrentResourceName(), 'flood.xml')
     local waterQuadCount = GetWaterQuadCount()
     local calmingQuadCount = GetCalmingQuadCount()
@@ -30,13 +33,42 @@ RegisterNetEvent('strez:client:SendEmergencyEmail', function(text)
         message = text,
         button = {}
     })
-    elseif Config.Phone == 'gks' then
-        TriggerServerEvent('gksphone:NewMail', {
-        sender = "City of Los Santos",
-        subject = "Emergency Alert",
-        message = text,
-        button = {}
-    })
+    elseif Config.Phone == 'ys' then
+
+        local insertId, received = exports["yflip-phone"]:SendMail({
+            title = "Emergency Alert",
+            sender = 'emergency@CityofLosSantos.com',
+            senderDisplayName = 'Weatherbroadcast',
+            content = 'The National Weather Service has issued a TSUNAMI WARNING for Los Santos, In 30 minutes! Please start heading home or somewhere local for SAFETY!',
+            actions = {
+                {
+                    label = "Accept",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = false,
+                        data = "test data",
+                        shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                    }
+                },
+                {
+                    label = "Decline",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = true,
+                         data = "test data",
+                        shouldClose = true
+                    }
+                }
+            },
+            attachments = {
+                {
+                    photo = "https://imgur.com/gDTZiHK.jpg"
+                },
+                {
+                    location = { x = 453, y = 5570 }, 
+                }
+            }
+        }, 'all')
     end 
 end)
 
@@ -57,13 +89,42 @@ RegisterNetEvent('strez:client:SendAnnouncementEmail', function(text)
         message = text,
         button = {}
     })
-    elseif Config.Phone == 'gks' then
-        TriggerServerEvent('gksphone:NewMail', {
-        sender = "City of Los Santos",
-        subject = "Announcement",
-        message = text,
-        button = {}
-    })
+elseif Config.Phone == 'ys' then
+
+    local insertId, received = exports["yflip-phone"]:SendMail({
+        title = "Emergency Alert",
+        sender = 'emergency@CityofLosSantos.com',
+        senderDisplayName = 'Weatherbroadcast',
+        content = 'The National Weather Service has issued a TSUNAMI WARNING for Los Santos, In 15 minutes! Please start heading home or somewhere local for SAFETY!',
+        actions = {
+            {
+                label = "Accept",
+                data = {
+                    event = "yflip-phone:client:mail:test-callback",
+                    isServer = false,
+                    data = "test data",
+                    shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                }
+            },
+            {
+                label = "Decline",
+                data = {
+                    event = "yflip-phone:client:mail:test-callback",
+                    isServer = true,
+                    data = "test data",
+                    shouldClose = true
+                }
+            }
+        },
+        attachments = {
+            {
+                photo = "https://imgur.com/WW9fgD4.jpg"
+            },
+            {
+                location = { x = 453, y = 5570 },
+            }
+        }
+    }, 'all')
     end 
 end)
 
@@ -95,12 +156,42 @@ RegisterNetEvent('strez:client:TsunamiManual', function(text)
                 button = {}
             })
         elseif Config.Phone == 'gks' then
-            TriggerServerEvent('gksphone:NewMail', {
-            sender = "District of Los Santos",
-            subject = "Emergency Broadcast",
-            message = message,
-            button = {}
-        })
+        elseif Config.Phone == 'ys' then
+
+            local insertId, received = exports["yflip-phone"]:SendMail({
+                title = "Emergency Alert",
+                sender = 'emergency@CityofLosSantos.com',
+                senderDisplayName = 'Weatherbroadcast',
+                content = 'The National Weather Service has issued a TSUNAMI WARNING for Los Santos, In 15 minutes! Please start heading home or somewhere local for SAFETY!',
+                actions = {
+                    {
+                        label = "Accept",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = false,
+                            data = "test data",
+                            shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                        }
+                    },
+                    {
+                        label = "Decline",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = true,
+                            data = "test data",
+                            shouldClose = true
+                        }
+                    }
+                },
+                attachments = {
+                    {
+                        photo = "https://imgur.com/819VIzJ.jpg"
+                    },
+                    {
+                        location = { x = 453, y = 5570 },
+                    }
+                }
+            }, 'all')
         end
     end
     Wait(math.random(5000, 15000))
@@ -108,7 +199,13 @@ RegisterNetEvent('strez:client:TsunamiManual', function(text)
     Wait(math.random(5000, 15000))
     TriggerEvent('strez:raisewater')
     Wait(math.random(5000, 15000))
-    TriggerServerEvent('qb-weathersync:server:toggleBlackout')
+    --TriggerServerEvent('qb-weathersync:server:toggleBlackout')
+    lib.addCommand('blackout', {
+        help = 'Say bye bye to power',
+        restricted = 'group.admin',
+    }, function(source)
+        globalState.blackOut = not globalState.blackOut
+    end)
 end)
 
 -------------------- Tsunami Showcase  --------------------
@@ -120,6 +217,42 @@ RegisterNetEvent('strez:client:TsunamiShowcase', function(text)
         TriggerEvent('QBCore:Notify', 'Stage 1/30min Restart: Will get a Weather Alert letting everyone know its a CLEAR day', 'success', 15000)
     elseif Config.Showcase == 'ox' then
         lib.notify({ description = 'Stage 1/30min Restart: Will get a Weather Alert letting everyone know its a CLEAR day', duration = 15000,type = 'info', position = 'top-right'})
+    elseif Config.Showcase == 'ys' then
+
+        local insertId, received = exports["yflip-phone"]:SendMail({
+            title = "Email title",
+            sender = 'phone@yflip.com',
+            senderDisplayName = 'YFlip Phone',
+            content = 'Stage 1/30min Restart: Will get a Weather Alert letting everyone know its a CLEAR day',
+            actions = {
+                {
+                    label = "Accept",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = false,
+                        data = "test data",
+                        shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                    }
+                },
+                {
+                    label = "Decline",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = true,
+                         data = "test data",
+                        shouldClose = true
+                    }
+                }
+            },
+            attachments = {
+                {
+                    photo = "https://imgur.com/819VIzJ.jpg"
+                },
+                {
+                    location = { x = 453, y = 5570 },
+                }
+            }
+        }, 'all')
     end
     TriggerServerEvent('qb-weathersync:server:setWeather', 'CLEAR')
     Wait(math.random(15000, 30000))
@@ -127,6 +260,42 @@ RegisterNetEvent('strez:client:TsunamiShowcase', function(text)
         TriggerEvent('QBCore:Notify', 'Stage 2/15min Restart: Will get a Weather Alert letting everyone know the weather took a turn and is now RAINING', 'success', 15000)
     elseif Config.Showcase == 'ox' then
         lib.notify({ description = 'Stage 2/15min Restart: Will get a Weather Alert letting everyone know the weather took a turn and is now RAINING', duration = 15000,type = 'info', position = 'top-right'})
+    elseif Config.Showcase == 'ys' then
+
+        local insertId, received = exports["yflip-phone"]:SendMail({
+            title = "Emergency Alert",
+            sender = 'emergency@CityofLosSantos.com',
+            senderDisplayName = 'Weatherbroadcast',
+            content = 'Stage 2/15min Restart: Will get a Weather Alert letting everyone know the weather took a turn and is now RAINING',
+            actions = {
+                {
+                    label = "Accept",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = false,
+                        data = "test data",
+                        shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                    }
+                },
+                {
+                    label = "Decline",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = true,
+                         data = "test data",
+                        shouldClose = true
+                    }
+                }
+            },
+            attachments = {
+                {
+                    photo = "https://imgur.com/819VIzJ.jpg"
+                },
+                {
+                    location = { x = 453, y = 5570 },
+                }
+            }
+        }, 'all')
     end
     TriggerServerEvent('qb-weathersync:server:setWeather', 'RAIN')
     Wait(math.random(15000, 30000))
@@ -134,6 +303,42 @@ RegisterNetEvent('strez:client:TsunamiShowcase', function(text)
         TriggerEvent('QBCore:Notify', 'Stage 3/5min Restart: Will get a Weather Alert letting everyone know the weather took a turn and is now THUNDER', 'success', 15000)
     elseif Config.Showcase == 'ox' then
         lib.notify({ description = 'Stage 3/5min Restart: Will get a Weather Alert letting everyone know the weather took a turn and is now THUNDER', duration = 15000,type = 'info', position = 'top-right'})
+    elseif Config.Showcase == 'ys' then
+
+        local insertId, received = exports["yflip-phone"]:SendMail({
+            title = "Emergency Alert",
+            sender = 'emergency@CityofLosSantos.com',
+            senderDisplayName = 'Weatherbroadcast',
+            content = 'Stage 3/5min Restart: Will get a Weather Alert letting everyone know the weather took a turn and is now THUNDER',
+            actions = {
+                {
+                    label = "Accept",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = false,
+                        data = "test data",
+                        shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                    }
+                },
+                {
+                    label = "Decline",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = true,
+                         data = "test data",
+                        shouldClose = true
+                    }
+                }
+            },
+            attachments = {
+                {
+                    photo = "https://imgur.com/819VIzJ.jpg"
+                },
+                {
+                    location = { x = 453, y = 5570 },
+                }
+            }
+        }, 'all')
     end
     TriggerServerEvent('qb-weathersync:server:setWeather', 'THUNDER')
     Wait(math.random(15000, 30000))
@@ -141,6 +346,42 @@ RegisterNetEvent('strez:client:TsunamiShowcase', function(text)
         TriggerEvent('QBCore:Notify', 'Stage 3/5min Restart: Will play a global warning sound to alert all players Tsunami is coming get to high ground (water rising)', 'success', 15000)
     elseif Config.Showcase == 'ox' then
         lib.notify({ description = 'Stage 3/5min Restart: Will play a global warning sound to alert all players Tsunami is coming get to high ground (water rising)', duration = 15000,type = 'info', position = 'top-right'})
+    elseif Config.Showcase == 'ys' then
+
+        local insertId, received = exports["yflip-phone"]:SendMail({
+            title = "Emergency Alert",
+            sender = 'emergency@CityofLosSantos.com',
+            senderDisplayName = 'Weatherbroadcast',
+            content = 'Stage 3/5min Restart: Will play a global warning sound to alert all players Tsunami is coming get to high ground (water rising)',
+            actions = {
+                {
+                    label = "Accept",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = false,
+                        data = "test data",
+                        shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                    }
+                },
+                {
+                    label = "Decline",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = true,
+                         data = "test data",
+                        shouldClose = true
+                    }
+                }
+            },
+            attachments = {
+                {
+                    photo = "https://imgur.com/819VIzJ.jpg"
+                },
+                {
+                    location = { x = 453, y = 5570 },
+                }
+            }
+        }, 'all')
     end
     TriggerEvent('InteractSound_CL:PlayOnOne', 'Alert', 0.1)
     TriggerEvent('strez:raisewater')
@@ -149,8 +390,50 @@ RegisterNetEvent('strez:client:TsunamiShowcase', function(text)
         TriggerEvent('QBCore:Notify', 'Stage 4/1min Restart: Will get a final email warning to get to high ground for safety & BLACKOUT to the city', 'success', 15000)
     elseif Config.Showcase == 'ox' then
         lib.notify({ description = 'Stage 4/1min Restart: Will get a final email warning to get to high ground for safety & BLACKOUT to the city', duration = 15000,type = 'info', position = 'top-right'})
+    elseif Config.Showcase == 'ys' then
+
+        local insertId, received = exports["yflip-phone"]:SendMail({
+            title = "Emergency Alert",
+            sender = 'emergency@CityofLosSantos.com',
+            senderDisplayName = 'Weatherbroadcast',
+            content = 'Stage 4/1min Restart: Will get a final email warning to get to high ground for safety & BLACKOUT to the city',
+            actions = {
+                {
+                    label = "Accept",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = false,
+                        data = "test data",
+                        shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                    }
+                },
+                {
+                    label = "Decline",
+                    data = {
+                        event = "yflip-phone:client:mail:test-callback",
+                        isServer = true,
+                         data = "test data",
+                        shouldClose = true
+                    }
+                }
+            },
+            attachments = {
+                {
+                    photo = "https://imgur.com/819VIzJ.jpg"
+                },
+                {
+                    location = { x = 453, y = 5570 },
+                }
+            }
+        }, 'all')
     end
-    TriggerServerEvent('qb-weathersync:server:toggleBlackout')
+    --TriggerServerEvent('qb-weathersync:server:toggleBlackout')
+    lib.addCommand('blackout', {
+        help = 'Say bye bye to power',
+        restricted = 'group.admin',
+    }, function(source)
+        globalState.blackOut = not globalState.blackOut
+    end)
     Wait(math.random(15000, 30000))
     ExecuteCommand("ensure qb-tsunami")
 end)
@@ -180,13 +463,42 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto30', function(text)
                 message =  message,
                 button = {}
             })
-        elseif Config.Phone == 'gks' then
-            TriggerServerEvent('gksphone:NewMail', {
-            sender = "City of Los Santos",
-            subject = "Weather Broadcast",
-            message = message,
-            button = {}
-        })
+        elseif Config.Phone == 'ys' then
+
+            local insertId, received = exports["yflip-phone"]:SendMail({
+                title = "Emergency Alert",
+                sender = 'emergency@CityofLosSantos.com',
+                senderDisplayName = 'Weatherbroadcast',
+                content = 'We\'re happy to report that we have clear skies dominating the forecast, and there is no rain expected in the foreseeable future.',
+                actions = {
+                    {
+                        label = "Accept",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = false,
+                            data = "test data",
+                            shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                        }
+                    },
+                    {
+                        label = "Decline",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = true,
+                            data = "test data",
+                            shouldClose = true
+                        }
+                    }
+                },
+                attachments = {
+                    {
+                        photo = "https://imgur.com/819VIzJ.jpg"
+                    },
+                    {
+                        location = { x = 453, y = 5570 },
+                    }
+                }
+            }, 'all')
         end
     end
     Wait(5000)
@@ -216,13 +528,42 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto15', function(text)
                 message =  message,
                 button = {}
             })
-        elseif Config.Phone == 'gks' then
-            TriggerServerEvent('gksphone:NewMail', {
-            sender = "City of Los Santos",
-            subject = "Weather Broadcast",
-            message = message,
-            button = {}
-        })
+        elseif Config.Phone == 'ys' then
+
+            local insertId, received = exports["yflip-phone"]:SendMail({
+                title = "Emergency Alert",
+                sender = 'emergency@CityofLosSantos.com',
+                senderDisplayName = 'Weatherbroadcast',
+                content = 'We apologize for the inaccurate forecasts earlier, and I understand your concern. It appears that the weather has taken an unexpected turn, and rain is now falling.',
+                actions = {
+                    {
+                        label = "Accept",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = false,
+                            data = "test data",
+                            shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                        }
+                    },
+                    {
+                        label = "Decline",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = true,
+                            data = "test data",
+                            shouldClose = true
+                        }
+                    }
+                },
+                attachments = {
+                    {
+                        photo = "https://imgur.com/819VIzJ.jpg"
+                    },
+                    {
+                        location = { x = 453, y = 5570 },
+                    }
+                }
+            }, 'all')
         end
     end
     Wait(5000)
@@ -254,12 +595,42 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto5', function(text)
                 button = {}
             })
         elseif Config.Phone == 'gks' then
-            TriggerServerEvent('gksphone:NewMail', {
-            sender = "City of Los Santos",
-            subject = "Emergency Broadcast",
-            message = message,
-            button = {}
-        })
+        elseif Config.Phone == 'ys' then
+
+            local insertId, received = exports["yflip-phone"]:SendMail({
+                title = "Emergency Alert",
+                sender = 'emergency@CityofLosSantos.com',
+                senderDisplayName = 'Weatherbroadcast',
+                content = 'This is an emergency weather update. A tsunami is predicted to make contact in less than 5 minutes. If you are in a coastal area, it is imperative to take immediate action to move to higher ground and seek safety. Please follow any official alerts, instructions, and evacuation orders issued by local authorities. Stay away from beaches and low-lying areas.',
+                actions = {
+                    {
+                        label = "Accept",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = false,
+                            data = "test data",
+                            shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                        }
+                    },
+                    {
+                        label = "Decline",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = true,
+                            data = "test data",
+                            shouldClose = true
+                        }
+                    }
+                },
+                attachments = {
+                    {
+                        photo = "https://imgur.com/819VIzJ.jpg"
+                    },
+                    {
+                        location = { x = 453, y = 5570 },
+                    }
+                }
+            }, 'all')
         end
     end
     Wait(math.random(15000, 30000))
@@ -267,7 +638,13 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto5', function(text)
     Wait(math.random(15000, 30000))
     TriggerEvent('strez:raisewater')
     Wait(math.random(15000, 30000))
-    TriggerServerEvent('qb-weathersync:server:toggleBlackout')
+    --TriggerServerEvent('qb-weathersync:server:toggleBlackout')
+    lib.addCommand('blackout', {
+        help = 'Say bye bye to power',
+        restricted = 'group.admin',
+    }, function(source)
+        globalState.blackOut = not globalState.blackOut
+    end)
 end)
 
 -- 1 Minutes Reminder
@@ -295,12 +672,42 @@ RegisterNetEvent('strez:client:SendMailTsunamiAuto1', function(text)
                 button = {}
             })
         elseif Config.Phone == 'gks' then
-            TriggerServerEvent('gksphone:NewMail', {
-            sender = "City of Los Santos",
-            subject = "Emergency Broadcast",
-            message = message,
-            button = {}
-        })
+        elseif Config.Phone == 'ys' then
+
+            local insertId, received = exports["yflip-phone"]:SendMail({
+                title = "Emergency Alert",
+                sender = 'emergency@CityofLosSantos.com',
+                senderDisplayName = 'Weatherbroadcast',
+                content = 'This is an emergency weather update. A tsunami is imminent. If you are in a coastal area, it is imperative to take immediate action to move to higher ground and seek safety. Please follow any official alerts, instructions, and evacuation orders issued by local authorities. Stay away from beaches and low-lying areas.',
+                actions = {
+                    {
+                        label = "Accept",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = false,
+                            data = "test data",
+                            shouldClose = true -- if true: the email tab will be closed after the callback is executed, false: keep the email open
+                        }
+                    },
+                    {
+                        label = "Decline",
+                        data = {
+                            event = "yflip-phone:client:mail:test-callback",
+                            isServer = true,
+                            data = "test data",
+                            shouldClose = true
+                        }
+                    }
+                },
+                attachments = {
+                    {
+                        photo = "https://imgur.com/819VIzJ.jpg"
+                    },
+                    {
+                        location = { x = 453, y = 5570 },
+                    }
+                }
+            }, 'all')
         end
     end
 end)
